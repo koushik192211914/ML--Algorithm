@@ -80,12 +80,43 @@
     </header>
 
     <div class="results-container">
-        <h1>Experimental Results</h1>
+        <h1>Experimental Results & Methodology</h1>
+        <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 20px;">By Jyothi Koushik</p>
+
+        <div class="alert">
+            <strong>Hardware Context:</strong> Benchmarks executed on Windows (x64) with Python 3.13. Training performed
+            on CPU with parallel split-finding enabled.
+        </div>
+
         <div class="metrics-summary">
-            <h3>Model Performance Summary</h3>
-            <p>Random Forest Accuracy: <strong>0.9649</strong></p>
-            <p>XGBoost Accuracy: <strong>0.9561</strong></p>
-            <br>
+            <h3>Overall Benchmark Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Random Forest</th>
+                        <th>XGBoost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td>0.9649</td>
+                        <td>0.9561</td>
+                    </tr>
+                    <tr>
+                        <td>Precision (Class 1)</td>
+                        <td>0.96</td>
+                        <td>0.96</td>
+                    </tr>
+                    <tr>
+                        <td>Recall (Class 1)</td>
+                        <td>0.98</td>
+                        <td>0.97</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <h3>XGBoost Classification Report</h3>
             <code>
               precision    recall  f1-score   support<br>
