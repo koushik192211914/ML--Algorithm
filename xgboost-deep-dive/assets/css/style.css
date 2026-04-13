@@ -163,6 +163,36 @@ footer {
     margin-left: 20px;
 }
 
+.github-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-left: 20px;
+    border: 1px solid var(--border-color);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.github-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.github-link span {
+    margin-left: 6px;
+    color: #f1e05a;
+    /* Star color */
+}
+
+body.light-mode .github-link {
+    background: #f1f2f3;
+}
+
 .theme-switch {
     display: inline-block;
     height: 24px;
