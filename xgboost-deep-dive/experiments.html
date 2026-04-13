@@ -109,6 +109,35 @@
                 <img src="assets/images/confusion_matrix.png" alt="Confusion Matrix">
             </div>
         </div>
+
+        <h2 style="margin-top: 60px;">The Experiment Code</h2>
+        <p>Below is the complete Python script used to train the models and generate the visual assets above.</p>
+        <pre
+            style="background: #1e1e1e; padding: 20px; border-radius: 8px; color: #a5d6ff; border: 1px solid var(--border-color); overflow-x: auto; margin-top: 20px;">
+import xgboost as xgb
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1. Load Dataset
+data = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2)
+
+# 2. Train Random Forest
+rf = RandomForestClassifier(n_estimators=100)
+rf.fit(X_train, y_train)
+
+# 3. Train XGBoost
+xgb_model = xgb.XGBClassifier(n_estimators=100, learning_rate=0.1)
+xgb_model.fit(X_train, y_train)
+
+# 4. Generate Visuals
+# - Accuracy comparison barchart
+# - Top 10 Feature Importances
+# - Confusion Matrix heatmap
+        </pre>
     </div>
 
     <footer>

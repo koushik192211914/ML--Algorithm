@@ -41,6 +41,32 @@ XGBoost introduced several key innovations:
 - **Weighted Quantile Sketch**: An algorithm to find optimal split points efficiently.
 - **Parallel Computing**: While the trees are sequential, the split-finding process within each tree is parallelized.
 
+## Code Implementation: XGBoost with scikit-learn
+
+A key strength of XGBoost is its compatibility with the scikit-learn API. Below is a concise example of how to implement the `XGBClassifier`:
+
+```python
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# 1. Prepare Data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 2. Initialize and Train
+model = xgb.XGBClassifier(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=5,
+    eval_metric='logloss'
+)
+model.fit(X_train, y_train)
+
+# 3. Predict and Evaluate
+predictions = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, predictions):.4f}")
+```
+
 ## Hands-on Experiment: XGBoost vs. Random Forest
 
 To demonstrate the efficacy of XGBoost, we conducted an experiment on the **Breast Cancer Wisconsin (Diagnostic)** dataset. We compared a vanilla Random Forest against a tuned XGBoost model.

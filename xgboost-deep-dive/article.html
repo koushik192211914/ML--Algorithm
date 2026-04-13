@@ -95,6 +95,26 @@
         \[ \text{Obj}^{(t)} \approx \sum_{i=1}^n [L(y_i, \hat{y}_i^{(t-1)}) + g_i f_t(x_i) + \frac{1}{2} h_i f_t^2(x_i)]
         + \Omega(f_t) \]
 
+        <h2>Code Implementation: XGBoost with scikit-learn</h2>
+        <p>XGBoost provides a seamless integration with the scikit-learn suite. Here is the core implementation used in
+            our benchmark:</p>
+        <pre
+            style="background: #1e1e1e; padding: 20px; border-radius: 8px; color: #dcdcdc; border: 1px solid var(--border-color); overflow-x: auto;">
+import xgboost as xgb
+
+# Initialize the model
+model = xgb.XGBClassifier(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=5,
+    eval_metric='logloss'
+)
+
+# Train and Predict
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+        </pre>
+
         <h2>Hands-on Experiment: XGBoost vs. Random Forest</h2>
         <p>We conducted an experiment on the Breast Cancer dataset. While Random Forest achieved an accuracy of
             <strong>0.9649</strong>, XGBoost followed closely with <strong>0.9561</strong>.
