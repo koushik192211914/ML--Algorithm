@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XGBoost Deep Dive | Experiments</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .results-container {
+            padding: 40px 10%;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .chart-card h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .metrics-summary {
+            background: rgba(47, 129, 247, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metrics-summary code {
+            background: #000;
+            padding: 15px;
+            display: block;
+            overflow-x: auto;
+            color: #a5d6ff;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo">XG<span>Dive</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="article.html">Article</a></li>
+                <li><a href="experiments.html">Experiments</a></li>
+            </ul>
+        </nav>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+    </header>
+
+    <div class="results-container">
+        <h1>Experimental Results</h1>
+        <div class="metrics-summary">
+            <h3>Model Performance Summary</h3>
+            <p>Random Forest Accuracy: <strong>0.9649</strong></p>
+            <p>XGBoost Accuracy: <strong>0.9561</strong></p>
+            <br>
+            <h3>XGBoost Classification Report</h3>
+            <code>
+              precision    recall  f1-score   support<br>
+           0       0.95      0.93      0.94        43<br>
+           1       0.96      0.97      0.97        71<br>
+    accuracy                           0.96       114
+            </code>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Accuracy Comparison</h3>
+                <img src="assets/images/accuracy_comparison.png" alt="Accuracy Comparison">
+            </div>
+            <div class="chart-card">
+                <h3>XGBoost Feature Importance</h3>
+                <img src="assets/images/feature_importance.png" alt="Feature Importance">
+            </div>
+            <div class="chart-card">
+                <h3>XGBoost Confusion Matrix</h3>
+                <img src="assets/images/confusion_matrix.png" alt="Confusion Matrix">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Technical Deep Dive.</p>
+    </footer>
+</body>
+
+</html>

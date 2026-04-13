@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XGBoost Deep Dive | Technical Article</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        .article-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .article-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .article-content ul {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+            color: #d1d5db;
+        }
+
+        .katex-display {
+            margin: 20px 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo">XG<span>Dive</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="article.html">Article</a></li>
+                <li><a href="experiments.html">Experiments</a></li>
+            </ul>
+        </nav>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+    </header>
+
+    <main class="article-content">
+        <h1>Deep Dive into Gradient Boosting Machines: The Power of XGBoost</h1>
+        <p>In the landscape of modern machine learning, few algorithms have garnered as much prestige as <strong>XGBoost
+                (eXtreme Gradient Boosting)</strong>. In this article, we explore the theoretical foundations and
+            specific optimizations that make it unique.</p>
+
+        <h2>The Theory: From Boosting to XGBoost</h2>
+        <p>Boosting grows trees <strong>sequentially</strong>. Each new tree is designed to correct the errors made by
+            the previous trees using gradient descent.</p>
+
+        <p>The prediction at step \( t \) is:</p>
+        \[ \hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + f_t(x_i) \]
+
+        <p>The objective function used by XGBoost includes a second-order Taylor expansion:</p>
+        \[ \text{Obj}^{(t)} \approx \sum_{i=1}^n [L(y_i, \hat{y}_i^{(t-1)}) + g_i f_t(x_i) + \frac{1}{2} h_i f_t^2(x_i)]
+        + \Omega(f_t) \]
+
+        <h2>Hands-on Experiment: XGBoost vs. Random Forest</h2>
+        <p>We conducted an experiment on the Breast Cancer dataset. While Random Forest achieved an accuracy of
+            <strong>0.9649</strong>, XGBoost followed closely with <strong>0.9561</strong>.
+        </p>
+        <p>This result highlights a key ML truth: on smaller tabular datasets, the simpler decision boundary of Random
+            Forest can sometimes generalize better than the aggressive optimization of XGBoost.</p>
+
+        <a href="experiments.html" class="btn">View Detailed Results</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Technical Deep Dive.</p>
+    </footer>
+</body>
+
+</html>
