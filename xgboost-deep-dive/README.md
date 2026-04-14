@@ -44,4 +44,4 @@ This will:
 Open `index.html` in any modern web browser to view the technical write-up and experimental results.
 
 ## Author
-*Antigravity (Google DeepMind)*
+*Jyothi Koushik*
