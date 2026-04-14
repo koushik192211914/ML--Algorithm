@@ -30,39 +30,47 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Theme toggle checkbox not found in the DOM.');
     }
 
-    // Reveal animations on scroll
-    const cards = document.querySelectorAll('.card');
+    // Scroll Progress Bar
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progressBar) progressBar.style.width = scrolled + "%";
+    });
+
+    // Reveal animations and Active Navigation Highlighting
+    const sections = document.querySelectorAll('section.reveal');
+    const navLinks = document.querySelectorAll('.nav-link');
 
     const observerOptions = {
-        threshold: 0.1
+        threshold: 0.2,
+        rootMargin: "-10% 0px -20% 0px"
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                // Reveal section
+                entry.target.classList.add('visible');
+
+                // Update active link
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
             }
         });
     }, observerOptions);
 
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(card);
+    sections.forEach(section => {
+        sectionObserver.observe(section);
     });
 
-    // Navigation hover effect
-    const navLinks = document.querySelectorAll('nav ul li a');
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            link.style.color = 'var(--accent-color)';
-        });
-        link.addEventListener('mouseleave', () => {
-            if (!link.classList.contains('active')) {
-                link.style.color = 'var(--text-color)';
-            }
-        });
-    });
+    // Individual reveal for top elements (headers/intro)
+    const fadeElements = document.querySelectorAll('.reveal');
+    fadeElements.forEach(el => sectionObserver.observe(el));
 });

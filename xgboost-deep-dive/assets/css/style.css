@@ -27,6 +27,10 @@ body.light-mode {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -46,6 +50,25 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+/* Scroll Progress Bar */
+.progress-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 1001;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-color);
+    width: 0%;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px var(--accent-color);
 }
 
 .logo {
@@ -256,6 +279,24 @@ body.light-mode .github-link {
     color: var(--accent-color);
 }
 
+.sidebar-toc a.active {
+    color: var(--accent-color);
+    font-weight: 600;
+    position: relative;
+}
+
+.sidebar-toc a.active::before {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 15px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
 .tldr {
     background: rgba(47, 129, 247, 0.1);
     border-radius: 12px;
@@ -275,6 +316,41 @@ body.light-mode .github-link {
     margin-bottom: 0;
     font-style: italic;
     color: #fff;
+}
+
+/* Key Insight Box */
+.key-insight {
+    background: rgba(47, 129, 247, 0.05);
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(47, 129, 247, 0.1);
+}
+
+.key-insight::after {
+    content: '🔍';
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.key-insight h4 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.key-insight p {
+    color: var(--text-color);
+    margin: 0;
+    font-weight: 500;
 }
 
 .theme-switch {
@@ -342,4 +418,16 @@ input:checked+.slider:before {
     .hero h1 {
         font-size: 2.5rem;
     }
+}
+
+/* Scroll Fade-in Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

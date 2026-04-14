@@ -78,117 +78,160 @@
         </div>
     </header>
 
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
     <div class="article-layout">
         <main class="article-content" style="margin: 0; max-width: 800px;">
-            <h1>Beyond the Hype: A Decisive Look at XGBoost</h1>
+            <div class="reveal">
+                <h1>Beyond the Hype: A Decisive Look at XGBoost</h1>
+                <p style="color: var(--text-muted); font-size: 1.2rem; margin-top: -15px; margin-bottom: 30px;">
+                    A practical and theoretical exploration of XGBoost — beyond accuracy metrics.
+                </p>
 
-            <div class="meta-info">
-                <span><b>Author:</b> Jyothi Koushik</span>
-                <span><b>Date:</b> April 14, 2024</span>
-                <span><b>Read Time:</b> 10 min</span>
+                <div class="meta-info">
+                    <span><b>Author:</b> Jyothi Koushik</span>
+                    <span><b>Date:</b> April 14, 2024</span>
+                    <span><b>Read Time:</b> 12 min</span>
+                </div>
             </div>
 
-            <div class="tldr">
-                <h3>The "Hook"</h3>
-                <p>For structured tabular data, XGBoost remains the undisputed champion. It isn't just about speed; it's
-                    a fundamental shift in how we handle errors and scale models.</p>
-            </div>
+            <section id="intro" class="reveal">
+                <h2 id="intro-heading">Introduction: The Balance of Power in ML</h2>
+                <p>In the landscape of modern AI, competition-winning algorithms often become synonymous with "best."
+                    However, for structured, tabular data—the kind that powers banking, healthcare, and logistics—the
+                    choice isn't always so clear. While <strong>XGBoost (eXtreme Gradient Boosting)</strong> remains a
+                    dominant force, its dominance is not absolute. This article explores why.</p>
 
-            <h2 id="intro">Introduction: Why XGBoost Still Rules Tabular Data</h2>
-            <p>In the fast-evolving world of AI, for structured, tabular data—the kind that powers banking, healthcare,
-                and logistics—one algorithm remains the undisputed champion: <strong>XGBoost (eXtreme Gradient
-                    Boosting)</strong>. This article peels back the layers, moving from intuitive "sequential learning"
-                to the advanced calculus that gives it its edge.</p>
+                <div class="key-insight">
+                    <h4>Key Insight</h4>
+                    <p>XGBoost is a state-of-the-art power tool, but its effectiveness depends heavily on the dataset.
+                        Simpler bagging methods can often match or outperform it when data volume is low or noise is
+                        high.</p>
+                </div>
+            </section>
 
-            <h2 id="intuition">1. The Intuition: Learning from Mistakes</h2>
-            <p>Imagine solving a complex puzzle. Instead of starting over when you fail, you invite a friend to look
-                only at the pieces you missed. This is the essence of <strong>Boosting</strong>: an ensemble of "weak
-                learners" where each new tree corrects the errors of its predecessors.</p>
+            <section id="intuition" class="reveal">
+                <h2 id="intuition-heading">Intuition: How Boosting Learns</h2>
+                <p>Imagine solving a complex puzzle. Instead of starting over when you fail, you invite a colleague to
+                    look only at the pieces you missed. This is the essence of <strong>Boosting</strong>: a serial
+                    ensemble where each new tree is tasked specifically with fixing the residuals of its predecessors.
+                </p>
 
-            <div class="alert" style="border-left: 4px solid var(--accent-color);">
-                <strong>Insight:</strong> Traditional algorithms try to get everything right at once. Boosting accepts
-                that it will fail initially, but builds a system that systematically "hunts" for its own errors.
-            </div>
+                <div class="alert" style="border-left: 4px solid var(--accent-color);">
+                    <strong>In practice, this means:</strong> The model doesn't just learn a pattern; it iteratively
+                    hunts for its own weaknesses.
+                </div>
+            </section>
 
-            <h2 id="theory">2. The Engine: Loss Optimization and the Taylor Expansion</h2>
-            <p>XGBoost maps the <strong>curvature</strong> of the loss landscape using a second-order Taylor expansion,
-                allowing for much more precise optimization than standard gradient boosting.</p>
+            <section id="theory" class="reveal">
+                <h2 id="theory-heading">Inside XGBoost: The Core Idea</h2>
+                <p>Standard GBMs use gradients to find the direction of improvement. XGBoost takes this a step further
+                    by mapping the <strong>curvature</strong> of the loss landscape using a second-order Taylor
+                    expansion.</p>
 
-            <p>The objective function at step \( t \) is:</p>
-            \[ \text{Obj}^{(t)} \approx \sum_{i=1}^n [g_i f_t(x_i) + \frac{1}{2} h_i f_t^2(x_i)] + \Omega(f_t) \]
+                <p>The objective function at step \( t \) allows for precise optimization:</p>
+                \[ \text{Obj}^{(t)} \approx \sum_{i=1}^n [g_i f_t(x_i) + \frac{1}{2} h_i f_t^2(x_i)] + \Omega(f_t) \]
 
-            <p>By using the <strong>Hessian (\( h_i \))</strong>, XGBoost calculates the precise leaf weights where the
-                loss function hits its absolute minimum, rather than just guessing the downward direction.</p>
+                <p>By incorporating the <strong>Hessian (\( h_i \))</strong>, XGBoost calculates the exact split points
+                    and leaf weights that hit the loss minimum, rather than merely stepping toward it.</p>
+            </section>
 
-            <h2 id="innovations">3. The Innovations: What Makes it "eXtreme"?</h2>
-            <ul>
-                <li><strong>Sparsity Awareness:</strong> Learns a default direction for missing values, eliminating the
-                    need for manual imputation.</li>
-                <li><strong>Regularization:</strong> Includes L1 and L2 penalties directly in the objective function to
-                    prevent overfitting.</li>
-            </ul>
+            <section id="innovations" class="reveal">
+                <h2 id="innovations-heading">What Makes XGBoost Different</h2>
+                <ul>
+                    <li><strong>Sparsity Awareness:</strong> It automatically learns "default directions" for missing
+                        values, treating missing data as a feature rather than an error.</li>
+                    <li><strong>Second-Order Regularization:</strong> It penalizes complex trees directly in the
+                        objective function, preventing the aggressive boosting process from chasing noise.</li>
+                </ul>
+            </section>
 
-            <div class="alert">
-                <strong>Insight:</strong> Regularization acts as the model's "skeptic," ensuring patterns are
-                significant enough to outweigh the penalty of added complexity.
-            </div>
+            <section id="experiment" class="reveal">
+                <h2 id="experiment-heading">Results & What They Reveal</h2>
+                <p>We benchmarked Random Forest (Bagging) against XGBoost (Boosting) on the Breast Cancer Wisconsin
+                    dataset.</p>
 
-            <h2 id="experiment">4. Theory in Practice: The Benchmark</h2>
-            <p>We compared XGBoost against the <strong>Random Forest</strong> gold standard on the Breast Cancer
-                Wisconsin dataset.</p>
+                <div
+                    style="background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin: 20px 0;">
+                    <table style="width: 100%; border-collapse: collapse; color: #d1d5db;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th style="padding: 10px; text-align: left;">Model</th>
+                                <th style="padding: 10px; text-align: left;">Accuracy</th>
+                                <th style="padding: 10px; text-align: left;">Strategy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 10px;">Random Forest</td>
+                                <td style="padding: 10px;">96.49%</td>
+                                <td style="padding: 10px;">Bagging (Parallel)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; color: var(--accent-color);">XGBoost</td>
+                                <td style="padding: 10px; color: var(--accent-color);">95.61%</td>
+                                <td style="padding: 10px; color: var(--accent-color);">Boosting (Sequential)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <div
-                style="background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin: 20px 0;">
-                <table style="width: 100%; border-collapse: collapse; color: #d1d5db;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <th style="padding: 10px; text-align: left;">Model</th>
-                            <th style="padding: 10px; text-align: left;">Test Accuracy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 10px;">Random Forest</td>
-                            <td style="padding: 10px;">96.49%</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; color: var(--accent-color);">XGBoost</td>
-                            <td style="padding: 10px; color: var(--accent-color);">95.61%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <p><strong>Wait, why did Random Forest win?</strong> On this specific dataset (569 samples), XGBoost's
+                    aggressive optimization actually led to slight overfitting. This is a critical lesson: a more
+                    powerful optimizer isn't better if the data isn't sufficient to justify the complexity.</p>
+            </section>
 
-            <h4>Why did Random Forest win?</h4>
-            <p>This highlights <strong>The Dataset Impact</strong>. On small datasets (569 samples), XGBoost's
-                aggressive optimization can "overfit the noise." Random Forest's safety net of independent trees often
-                generalizes better when data is limited.</p>
+            <section id="limitations" class="reveal">
+                <h2 id="limitations-heading">When XGBoost Is Not the Best Choice</h2>
+                <p>Despite its reputation, XGBoost should be used judiciously:</p>
+                <ol>
+                    <li><strong>Small Datasets:</strong> Bagging methods like Random Forest are often more resilient to
+                        overfitting in small-sample environments.</li>
+                    <li><strong>Need for High Interpretability:</strong> If your stakeholders require a deep
+                        understanding of *why* a decision was made, a simpler Decision Tree or Logistic Regression is
+                        far superior.</li>
+                    <li><strong>Extremely High Latency Requirements:</strong> While fast, XGBoost inference can be
+                        slower than simpler linear models in micro-latency environments.</li>
+                </ol>
+            </section>
 
-            <h2 id="when-not">5. When NOT to Use XGBoost</h2>
-            <ol>
-                <li><strong>Small Datasets:</strong> As seen above, simpler models might generalize better.</li>
-                <li><strong>Unstructured Data:</strong> Deep Learning remains king for images and audio.</li>
-                <li><strong>Strict Interpretability:</strong> Linear models are easier to explain to regulators.</li>
-            </ol>
+            <section id="why-matters" class="reveal">
+                <h2 id="why-matters-heading">Why This Matters</h2>
+                <p>Model selection is an engineering trade-off. In practice, this means we should always benchmark
+                    against simpler models before reaching for state-of-the-art libraries. True ML maturity is knowing
+                    when to use a simpler tool for a clearer result.</p>
+            </section>
 
-            <h2 id="takeaways">Key Takeaways from This Study</h2>
-            <p>XGBoost offers the highest potential for performance, provided you have the data to back it up and the
-                regularization to keep it in check. Its success lies in robust engineering—sparsity handling and
-                parallel split-finding—that makes it a production-ready titan.</p>
-
-            <a href="experiments.html" class="btn">View Detailed Results</a>
+            <section id="takeaways" class="reveal">
+                <h2 id="takeaways-heading">Practical Insights & Future Directions</h2>
+                <p>XGBoost remains a titan for tabular data, but its future lies in integration with explainability
+                    frameworks. Moving forward, we are exploring:</p>
+                <ul>
+                    <li><strong>SHAP Explainability:</strong> Moving beyond global importance to explain individual
+                        predictions.</li>
+                    <li><strong>Bayesian Optimization:</strong> Using Optuna to automate the search for hyperparameters.
+                    </li>
+                    <li><strong>Large-Scale Benchmarking:</strong> Testing against <b>LightGBM</b> and <b>CatBoost</b>
+                        on 100k+ row datasets.</li>
+                </ul>
+                <br>
+                <a href="experiments.html" class="btn">View Detailed Results</a>
+            </section>
         </main>
 
         <aside class="sidebar-toc">
             <h4>In this article</h4>
             <ul>
-                <li><a href="#intro">Introduction</a></li>
-                <li><a href="#intuition">1. Intuition</a></li>
-                <li><a href="#theory">2. The Engine</a></li>
-                <li><a href="#innovations">3. Innovations</a></li>
-                <li><a href="#experiment">4. The Benchmark</a></li>
-                <li><a href="#when-not">5. Pro-Tips</a></li>
-                <li><a href="#takeaways">Key Takeaways</a></li>
+                <li><a href="#intro" class="nav-link">Introduction</a></li>
+                <li><a href="#intuition" class="nav-link">1. Intuition</a></li>
+                <li><a href="#theory" class="nav-link">2. The Engine</a></li>
+                <li><a href="#innovations" class="nav-link">3. Innovations</a></li>
+                <li><a href="#experiment" class="nav-link">4. Results</a></li>
+                <li><a href="#limitations" class="nav-link">5. Limitations</a></li>
+                <li><a href="#why-matters" class="nav-link">Comparison</a></li>
+                <li><a href="#takeaways" class="nav-link">Future Work</a></li>
             </ul>
         </aside>
     </div>
