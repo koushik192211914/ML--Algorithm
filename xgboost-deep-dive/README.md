@@ -83,14 +83,5 @@ The research script generates high-resolution plots saved in `assets/images/`:
 3. **View the Story**:
    Open `index.html` to see the full technical presentation.
 
----
-## 🛠️ Git Sync Commands
-To update the repository with these insights, run:
-```bash
-git status
-git add .
-git commit -m "Refined README with structured ML insights, benchmark tables, and professional formatting"
-git push origin main
-```
 
 *Authored by Jyothi Koushik*
