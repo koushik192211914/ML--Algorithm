@@ -63,11 +63,18 @@ The research script generates high-resolution plots saved in `assets/images/`:
 3. **Regularization as a Guardrail**: Learning how L1/L2 penalties within the objective function prevent the model from growing uncontrollably.
 4. **Context > Algorithm**: Realizing that model choice is dictated by data volume and quality, not just the algorithm's reputation.
 
-## 🔮 Future Improvements
+## 🔮 Future Directions & Extensions
 
-- **SHAP Integration**: Moving from global feature importance to individual prediction explainability.
-- **GridSearch Optimization**: Systematically tuning `learning_rate` and `max_depth` to mitigate overfitting on small data.
-- **Scaling to Large Data**: Running the same benchmark on 100k+ samples to demonstrate where XGBoost truly pulls ahead.
+To evolve this project from a technical deep dive into a production-grade machine learning system, the following directions are proposed:
+
+*   **SHAP-Based Explainability**: Integrate SHAP (SHapley Additive Explanations) to transition from global feature importance to granular, per-sample insights, providing transparency for individual model decisions.
+*   **Advanced Hyperparameter Optimization**: Replace manual tuning with systematic Bayesian Optimization (via Optuna) or GridSearchCV to identify the optimal configuration for `alpha`, `lambda`, and `learning_rate`.
+*   **Large-Scale Benchmarking**: Evaluate performance on massive, multi-million row datasets to demonstrate XGBoost’s computational scalability compared to other ensemble methods.
+*   **Robust Performance Estimation**: Implement stratified K-Fold Cross-Validation to ensure evaluation metrics are resilient to data variance and provide a more reliable performance baseline.
+*   **Imbalanced Data Strategies**: Explore class-weighting and resampling techniques (SMOTE) to enhance model sensitivity in scenarios where the minority class is of critical interest.
+*   **Cross-Framework Comparison**: Conduct a rigorous benchmark against other modern boosting libraries like **LightGBM** (for histograms) and **CatBoost** (for categorical feature handling).
+*   **Efficiency Analysis**: Profile computational overhead including training time, peak memory usage, and inference latency across different hardware configurations.
+*   **Production Deployment**: Investigate real-world deployment patterns using containerization (Docker) and REST APIs (FastAPI) while maintaining strict model versioning and monitoring.
 
 ---
 ## 💻 Reproducibility & Local Setup
