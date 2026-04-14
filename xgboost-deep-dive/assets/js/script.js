@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-ready');
     // Theme Switch Logic
     const toggleSwitch = document.querySelector('#checkbox');
     const currentTheme = localStorage.getItem('theme');
