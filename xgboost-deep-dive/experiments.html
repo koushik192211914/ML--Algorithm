@@ -120,10 +120,21 @@
             <h3>XGBoost Classification Report</h3>
             <code>
               precision    recall  f1-score   support<br>
-           0       0.95      0.93      0.94        43<br>
-           1       0.96      0.97      0.97        71<br>
-    accuracy                           0.96       114
+            0       0.95      0.93      0.94        43<br>
+            1       0.96      0.97      0.97        71<br>
+     accuracy                           0.96       114
             </code>
+
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p>🔍 <strong>Interpretation:</strong> Random Forest performed slightly better here because it is a
+                    "bagging" method. On smaller datasets like Breast Cancer Wisconsin (569 samples), the parallel
+                    nature of Random Forest provides a natural smoothing effect that prevents it from chasing noise in
+                    the data.</p>
+                <p>💡 <strong>Insight:</strong> In real-world ML decision-making, this confirms that <em>more
+                        powerful</em> does not always mean <em>more effective</em>. XGBoost’s aggressive gradient-based
+                    optimization is a precision instrument that requires more data to calibrate its weights without
+                    overfitting.</p>
+            </div>
         </div>
 
         <div class="chart-grid">
