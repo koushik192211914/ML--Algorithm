@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Reveal animations and Active Navigation Highlighting
-    const sections = document.querySelectorAll('section.reveal');
+    const revealElements = document.querySelectorAll('.reveal');
     const navLinks = document.querySelectorAll('.nav-link');
 
     const observerOptions = {
-        threshold: 0.2,
-        rootMargin: "-10% 0px -20% 0px"
+        threshold: 0.1, // More lenient threshold
+        rootMargin: "0px 0px -50px 0px" // Only trigger when slightly entering from bottom
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -54,23 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reveal section
                 entry.target.classList.add('visible');
 
-                // Update active link
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
+                // Update active link if the element is a section
+                if (entry.target.tagName === 'SECTION') {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
             }
         });
     }, observerOptions);
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+    revealElements.forEach(el => {
+        sectionObserver.observe(el);
     });
 
-    // Individual reveal for top elements (headers/intro)
-    const fadeElements = document.querySelectorAll('.reveal');
-    fadeElements.forEach(el => sectionObserver.observe(el));
+    // Failsafe: Reveal all if not triggered within 2 seconds
+    setTimeout(() => {
+        revealElements.forEach(el => {
+            if (!el.classList.contains('visible')) {
+                el.classList.add('visible');
+                console.log('Failsafe triggered for:', el);
+            }
+        });
+    }, 2000);
 });

@@ -423,11 +423,16 @@ input:checked+.slider:before {
 /* Scroll Fade-in Animation */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Fallback for users who scroll quickly or if JS has issues */
+section:not(.reveal) {
+    opacity: 1;
 }
