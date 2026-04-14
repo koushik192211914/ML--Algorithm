@@ -69,12 +69,16 @@ print(f"Accuracy: {accuracy_score(y_test, predictions):.4f}")
 
 ## Hands-on Experiment: XGBoost vs. Random Forest
 
-To demonstrate the efficacy of XGBoost, we conducted an experiment on the **Breast Cancer Wisconsin (Diagnostic)** dataset. We compared a vanilla Random Forest against a tuned XGBoost model.
+To demonstrate the efficacy of XGBoost, we conducted an experiment using the **Breast Cancer Wisconsin (Diagnostic)** dataset. This is a classic binary classification problem where the goal is to predict whether a tumor is Malignant or Benign based on digitized images of fine needle aspirates.
 
-### Experimental Setup
-- **Dataset**: 569 samples, 30 features.
-- **Models**: `RandomForestClassifier` vs `XGBClassifier`.
-- **Metrics**: Accuracy, Confusion Matrix, and Feature Importance.
+### Dataset Overview
+- **Official Name**: Breast Cancer Wisconsin (Diagnostic) Dataset
+- **Total Samples**: 569
+- **Features**: 30 numeric features (computed from cell nuclei properties like radius, texture, perimeter, area, smoothness, etc.)
+- **Class Distribution**: 212 Malignant (M), 357 Benign (B)
+- **Experimental Split**: 80% Training (455 samples), 20% Testing (114 samples)
+- **Models**: `RandomForestClassifier` vs `XGBClassifier` (Standard scikit-learn API)
+- **Metrics**: Accuracy, Precision, Recall, Confusion Matrix, and Feature Importance.
 
 ### Results Analysis
 
@@ -95,5 +99,5 @@ XGBoost's use of the second-order derivative (Hessian $h_i$) allows it to determ
 XGBoost remains a state-of-the-art choice for tabular data. However, as our experiment shows, it is not a "silver bullet." The choice between a bagging approach (Random Forest) and a boosting approach (XGBoost) should be driven by dataset size, feature complexity, and the specific cost of false positives vs. false negatives.
 
 ---
-*Authored by Antigravity*
+*Authored by Jyothi Koushik*
 *References: Chen, T., & Guestrin, C. (2016). XGBoost: A Scalable Tree Boosting System.*
