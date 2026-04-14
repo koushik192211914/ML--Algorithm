@@ -56,6 +56,11 @@ Standard GBMs often grow until they overfit the training data. XGBoost includes 
 
 ---
 
+![XGBoost Feature Importance](assets/images/feature_importance.png)
+*Figure 1: Top 10 Features identified by XGBoost using weight-based importance.*
+
+---
+
 ## 4. Theory in Practice: The Benchmark
 
 To see how these concepts trade off, we compared XGBoost against the other "gold standard" of tabular data: **Random Forest**. We used the **Breast Cancer Wisconsin (Diagnostic)** dataset—a high-stakes binary classification task.
@@ -70,6 +75,12 @@ To see how these concepts trade off, we compared XGBoost against the other "gold
 | :--- | :--- |
 | **Random Forest** | **96.49%** |
 | **XGBoost** | **95.61%** |
+
+![Accuracy Comparison](assets/images/accuracy_comparison.png)
+*Figure 2: Comparative performance between Random Forest and XGBoost on test data.*
+
+![XGBoost Confusion Matrix](assets/images/confusion_matrix.png)
+*Figure 3: Confusion Matrix for the XGBoost model showing classification performance.*
 
 #### Why did Random Forest win?
 At first glance, this result seems counter-intuitive. Isn't XGBoost supposed to be better? 
@@ -97,4 +108,3 @@ Machine learning is often about balance. XGBoost offers the highest potential fo
 
 ---
 *Authored by Jyothi Koushik*
-*Technical Analysis provided by Antigravity*
