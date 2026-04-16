@@ -1,4 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Splash Screen Logic
+    const splashScreen = document.getElementById('splash-screen');
+    document.body.classList.add('splash-active');
+
+    // Hide splash screen after 1.5s or on window load (whichever is slower for safety)
+    const hideSplash = () => {
+        if (splashScreen) {
+            splashScreen.classList.add('fade-out');
+            document.body.classList.remove('splash-active');
+            // Remove from DOM after animation
+            setTimeout(() => {
+                splashScreen.remove();
+            }, 800);
+        }
+    };
+
+    window.addEventListener('load', () => {
+        setTimeout(hideSplash, 1000); // Small grace period
+    });
+
+    // Failsafe hiding
+    setTimeout(hideSplash, 3000);
+
     document.body.classList.add('js-ready');
     // Theme Switch Logic
     const toggleSwitch = document.querySelector('#checkbox');
